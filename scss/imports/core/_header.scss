@@ -1,0 +1,209 @@
+// css header
+header{
+    .bgrheader{
+        width: 100%;
+        // display: none;
+        height: var(--heightHeader);
+        background: rgb(0,0,0);
+        background: linear-gradient(90deg, rgba(0,0,0,0.5047152650122548) 100%, rgba(216,216,216,0.8548553210346639) 100%, rgba(142,136,136,0.6419701669730392) 100%); 
+        z-index: 1;
+        position: absolute;
+        @include transform(translateY(-100px));
+        @include transition($t);
+    }
+    .show{
+        @include transform(translateY(0px));
+        @include transition($t);
+    }
+    --heightHeader: 80px;
+    width: 100%;
+    height: var(--heightHeader);
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    .container-fluid{
+        position: relative;
+        z-index: 10;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .logo{
+            img{
+                width: 170px;
+            }
+            .hidden{
+                display: none;
+            }
+        }
+        .menu{
+            height: 100%;
+            display: flex;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            li{
+                .active{
+                    color: $yellow-cl;
+                }
+                height: 100%;
+                a{
+                    display: flex;
+                    text-decoration: none;
+                    height: 100%;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 0 20px;
+                    transition: $t;
+                    color: $white-cl;
+                    &:hover{
+                        color: $yellow-cl;
+                        transition: $t;
+                    }
+                }
+            }
+        }
+        .right{
+            .lang{
+                height: 100%;
+                @include mid(true);
+                position: relative;
+                @include text($fz-text, $font-main, $lh-text, $white-cl, uppercase);
+                &__current{
+                    height: 100%;
+                    display: inline-flex;
+                    cursor: pointer;
+                    i{
+                        @include mid(true);
+                        margin-left: 8px;
+                        img{
+                            width: 15px;
+                        }
+                    }
+                }
+                .active{
+                    display: block;
+                }
+                &_option{
+                    display: none;
+                    width: 60px;
+                    height: auto;
+                    background: $white-cl;
+                    padding: 20px; 
+                    position: absolute;
+                    right: 0;
+                    top: 15px;
+                    text-align: right;
+                    &-item{
+                        text-decoration: none;
+                        color: $text-cl;
+                        padding: 5px 0;
+                        cursor: pointer;
+                    }
+                }
+                    
+            }
+            .btnmenu{
+                cursor: pointer;
+                display: none;
+                width: 40px;
+                height: 20px;
+                position: relative;
+                z-index: 300;
+                span{
+                    width: 100%;
+                    height: 2px;
+                    display: block;
+                    background: $yellow-cl;
+                    position: absolute;
+                    top: 50%;
+                    @include transform(translateY(-50%));
+                    @include transition($t);
+                }
+                &::after,&::before{
+                    content: "";
+                    width: 100%;
+                    height: 2px;
+                    display: block;
+                    background: $yellow-cl;
+                    @include transform(rotate(0deg) translateY(0px));
+                    @include transition(transform $t);
+                }
+                &::after{
+                    position: absolute;
+                    bottom: 0;
+                }
+                &.clicked{
+                    &::before{
+                        @include transform(rotate(45deg) translate(6px,8px));
+                        @include transition(transform $t);
+                    }
+                    span{
+                        opacity: 0;
+                        @include transition($t);
+                    }
+                    &::after{
+                        @include transform(rotate(-45deg) translate(4px,-8px));
+                        @include transition(transform $t);
+                    }
+                }
+            }
+        }
+        .rpsmenu{
+            display: block !important;
+        }
+        .nav{
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            background: $black-cl;
+            position: fixed;
+            top: 0;
+            left: 0;
+            @include transform(initial);
+            z-index: 200;
+
+            opacity: 1;
+            @include transition(opacity $t);
+            ul{
+                flex-direction: column;
+                @include mid(false);
+                li{
+                    text-align: center;
+                    margin: 15px auto;
+                    padding: 10px;
+                    a{
+                        color: $white-cl;
+                    }
+                }
+            }
+            &.active{
+                opacity: 1;
+                @include transition(opacity $t);
+            }
+        }
+    }
+    @include sm{
+        .container-fluid{
+            .menu{
+                display: none;
+            }
+            .right{
+                display: inline-flex;
+                .lang{
+                    margin-right: 15px;
+                }
+                .btnmenu{
+                    display: block;
+                }
+            }
+        }
+    }
+    @include xs{
+        --heightHeader: 60px; 
+            .btnmenu{
+                display: block;
+            }
+    }
+}

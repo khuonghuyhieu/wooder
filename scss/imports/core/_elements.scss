@@ -1,0 +1,155 @@
+// css button, title, icon, elements...
+*{
+    img {
+        max-width: 100%;
+    }
+    -lv1{
+        @include text(100px,h,100px,$white-cl,none);
+        font-weight: normal;
+        margin: 0;
+        a{
+            @include text(100px,$font-main,100px,$white-cl,none);
+        }
+        @include md{
+        }
+        @include xs{
+        }
+    }
+}
+
+.btnmain{
+    border: 2px solid $white-cl;
+    padding: 10px 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $white-cl;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    @include transition($t);
+    i{
+        width: 25px;
+        display: block;
+        margin-left: 15px;
+        position: relative;
+        right: 0;
+        @include transition($t);
+    }
+    &:hover{
+        background: $yellow-cl;
+        @include transition($t);
+        i{
+            margin-left: 22px;
+            right: -10px;
+            @include transition($t);
+        }
+    }
+    @include xs{
+        padding: 8px 15px;
+    }
+}
+
+.btnmore{
+    display: inline-flex;
+    font-family: $font-stack;
+    letter-spacing: 2px;
+    position: relative;
+    @include transition($t);
+    color: $text-cl;
+    img{
+        margin-left: 10px;
+        width: 20px;
+        margin-top: 1px;
+        position: relative;
+        @include transform(translateX(0px));
+        @include transition($t);
+    }
+    &::before{
+        content: "";
+        width: 35px;
+        height: 2px;
+        background: $yellow-cl;
+        display: block;
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        @include transition($t);
+        @include transform(translateX(0px))
+    }
+    &:hover{
+        &::before{
+            @include transform(translateX(10px));
+            @include transition($t);
+        }
+        img{
+            @include transform(translateX(10px));
+            @include transition($t);
+        }
+    }
+}
+
+.popup-video{
+    z-index: 100000;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0, .7);
+    justify-content: center;
+    align-items: center;
+    &.active{
+        display: flex;
+    }
+    .iframe_wrap{
+        background: #000;
+        border: 5px solid #eee;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        max-width: 600px;
+        max-height: 338px;
+    }
+    .close{
+        position: absolute;
+        right: -25px;
+        top: -25px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        width: 50px;
+        height: 50px;
+        background: white;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    @include sm{
+        .iframe_wrap{
+            // overflow: hidden;
+            position: relative;
+            height: 100%;
+            width: 100%;
+            max-height: 315px;
+            max-width: 522px;
+            top: -10%;
+            .close{
+                right: -5px;
+                top: -25px;
+                width: 30px;
+                height: 30px;   
+            }
+            iframe{
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+            }
+        }
+    }
+}
